@@ -1,12 +1,27 @@
-version: "3"
+version: "3.7"
+
 services:
-  www:
-    build: .
+  web:
+    image: nginx:latest
     ports:
       - "80:80"
     volumes:
-      - ./src:/var/www/html/
+      - ./code:/code
+      - ./site.conf:/etc/nginx/conf.d/default.conf
     networks:
-      - default
+      - code-network
+    depends_on:
+      - php
+  php:
+    build: .
+    volumes:
+      - ./code:/code
+      - ./xdebug.conf:/usr/local/etc/php/conf.d/xdebug.ini
+    networks:
+      - code-network
     environment:
-      XDEBUG_CONFIG: remote_host=host.docker.internal
+      PHP_EXTENSION_XDEBUG: 1
+
+networks:
+  code-network:
+    driver: bridge
