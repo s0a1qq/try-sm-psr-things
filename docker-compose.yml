@@ -12,6 +12,7 @@ services:
       - code-network
     depends_on:
       - php
+
   php:
     build: .
     volumes:
@@ -21,6 +22,12 @@ services:
       - code-network
     environment:
       PHP_EXTENSION_XDEBUG: 1
+
+  composer:
+    image: composer:latest
+    command: install
+    volumes:
+      - ./code:/app
 
 networks:
   code-network:

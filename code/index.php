@@ -1,3 +1,6 @@
 <?php
-$a = 123*7;//test debug;
-echo phpinfo();
+
+//todo fix namespaces
+require 'vendor/autoload.php';
+
+echo 123;

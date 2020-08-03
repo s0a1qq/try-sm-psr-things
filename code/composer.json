@@ -1,0 +1,8 @@
+{
+  "config": {
+    "sort-packages": true
+  },
+  "require": {
+    "guzzlehttp/guzzle": "^7.0"
+  }
+}
